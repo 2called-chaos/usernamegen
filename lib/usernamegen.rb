@@ -22,8 +22,8 @@ class Usernamegen
 
   def initialize opts = {}
     @opts = opts.reverse_merge({
-      descriptions: "#{ROOT}/lib/usernamegen/descriptions.txt"),
-      things: "#{ROOT}/lib/usernamegen/things.txt"),
+      descriptions: "#{ROOT}/lib/usernamegen/descriptions.txt",
+      things: "#{ROOT}/lib/usernamegen/things.txt",
       rng: ::SecureRandom.urlsafe_base64(128),
     })
     @descriptions = load_file @opts[:descriptions]
