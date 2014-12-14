@@ -5,7 +5,7 @@ To make it easier to follow conversations we didn't want to show "anonymous" or 
 
 This gem uses two lists (descriptive words and nouns) and multiplies them with each and another resulting in a list of mostly meaningful and often silly name combinations.
 
-**The current list generates about 50k unique usernames**. Please help increasing the size by providing more words.
+**The current list generates at least 58.520 unique usernames**. Please help increasing the size by providing more words.
 
 ## Example names
 
