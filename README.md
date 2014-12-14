@@ -40,6 +40,10 @@ You can find an example ActiveRecord model + rake import tasks in the following 
 
   * [» ActiveRecord model example and rake import task](https://gist.github.com/2called-chaos/46705324d913e4f9cc6b)
 
+## Gotchas
+
+Apparently we are relying on ActiveSupport core_ext even though it's not defined as dependency.
+
 ## Contributing
 
 1. Fork it ( http://github.com/2called-chaos/usernamegen/fork )
