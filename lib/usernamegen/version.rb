@@ -1,3 +1,3 @@
-module Usernamegen
+class Usernamegen
   VERSION = "0.1.0"
 end
