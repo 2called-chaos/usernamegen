@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'usernamegen/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "dle"
+  spec.name          = "usernamegen"
   spec.version       = Usernamegen::VERSION
   spec.authors       = ["Sven Pachnit"]
   spec.email         = ["sven@bmonkeys.net"]
