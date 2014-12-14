@@ -36,9 +36,9 @@ You can use the generator class like so:
     Usernamegen.one
 
 
-You can find an example ActiveRecord model + rake import tasks in this gist.
+You can find an example ActiveRecord model + rake import tasks in the following gist.
 
-  * [» ActiveRecord model and rake import task](https://gist.github.com/2called-chaos/46705324d913e4f9cc6b)
+  * [» ActiveRecord model example and rake import task](https://gist.github.com/2called-chaos/46705324d913e4f9cc6b)
 
 ## Contributing
 
