@@ -1,5 +1,6 @@
 require "usernamegen/version"
 require "securerandom"
+require "active_support/core_ext"
 
 class Usernamegen
   ROOT = File.expand_path("../..", __FILE__)
@@ -35,7 +36,7 @@ class Usernamegen
   end
 
   def one
-    [@descriptions.sample(1, rng: @opts[:rng]), @things.sample(1, rng: @opts[:rng])].join(" ").titleize
+    [@descriptions.sample(1, random: @opts[:rng]), @things.sample(1, random: @opts[:rng])].join(" ").titleize
   end
 
   def all
