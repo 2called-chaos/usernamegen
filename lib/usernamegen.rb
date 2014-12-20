@@ -33,7 +33,7 @@ class Usernamegen
   end
 
   def load_file file
-    File.read(file).split("\n").lazy.map(&:strip).reject(&:blank?).to_a.sort
+    File.read(file).split("\n").map(&:strip).reject(&:blank?)
   end
 
   def one
