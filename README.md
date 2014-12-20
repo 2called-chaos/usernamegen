@@ -1,5 +1,8 @@
 # Usernamegen - a not so serious name generator
 
+[![Gem Version](https://badge.fury.io/rb/usernamegen.svg)](http://badge.fury.io/rb/usernamegen)
+[![Build Status](https://travis-ci.org/2called-chaos/usernamegen.svg?branch=master)](https://travis-ci.org/2called-chaos/usernamegen)
+
 We thought our users should be able to comment even when they haven't choose a username yet.
 To make it easier to follow conversations we didn't want to show "anonymous" or some boring incrementing name á la "guest 1234".
 
@@ -40,9 +43,9 @@ You can find an example ActiveRecord model + rake import tasks in the following 
 
   * [» ActiveRecord model example and rake import task](https://gist.github.com/2called-chaos/46705324d913e4f9cc6b)
 
-## Gotchas
+## Testing
 
-Apparently we are relying on ActiveSupport core_ext even though it's not defined as dependency.
+Just `bundle` and invoke `rake`.
 
 ## Contributing
 
