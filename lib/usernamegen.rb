@@ -1,5 +1,6 @@
 require "usernamegen/version"
 require "securerandom"
+require "active_support"
 require "active_support/core_ext"
 
 class Usernamegen
