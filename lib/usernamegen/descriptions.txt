@@ -17,6 +17,7 @@ affable
 affectionate
 affluent
 afraid
+agent
 aggressive
 aghast
 agile
