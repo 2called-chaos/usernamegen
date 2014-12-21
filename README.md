@@ -20,6 +20,8 @@ This gem uses two lists (descriptive words and nouns) and multiplies them with e
 
 ## Installation
 
+Requires Ruby >= 1.9.3
+
 Simple as:
 
     $ gem install usernamegen
