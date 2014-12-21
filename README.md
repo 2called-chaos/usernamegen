@@ -8,7 +8,7 @@ To make it easier to follow conversations we didn't want to show "anonymous" or 
 
 This gem uses two lists (descriptive words and nouns) and multiplies them with each and another resulting in a list of mostly meaningful and often silly name combinations.
 
-**The current list generates at least 1.366.633 unique usernames**. Please help increasing the size by providing more words.
+**The current list generates at least 1,367,631 unique usernames**. Please help increasing the size by providing more words.
 
 ## Example names
 
@@ -34,7 +34,7 @@ Or list in your Gemfile
 
 You can use the generator class like so:
 
-    # load files and assembles list each time (not that efficient)
+    # load files and assembles list each time (yielding more than 1 million strings, cache them!)
     Usernamegen.all
 
     # same as #all but returns random entry
