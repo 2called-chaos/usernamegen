@@ -6,8 +6,8 @@ require "active_support/core_ext"
 class Usernamegen
   ROOT = File.expand_path("../..", __FILE__)
 
-  def self.one opts = {}
-    new(opts).one
+  def self.one(opts = {}, &block)
+    new(opts).one(&block)
   end
 
   def self.all opts = {}
@@ -36,8 +36,16 @@ class Usernamegen
     File.read(file).split("\n").map(&:strip).reject(&:blank?)
   end
 
-  def one
-    [@descriptions.sample(1, random: @opts[:rng]), @things.sample(1, random: @opts[:rng])].join(" ").titleize
+  def one(&block)
+    username_arr = [@descriptions.sample(1, random: @opts[:rng]), @things.sample(1, random: @opts[:rng])]
+
+    formatted = if block_given?
+      yield username_arr
+    else
+      username_arr.join(" ").titleize
+    end
+
+    formatted
   end
 
   def all
