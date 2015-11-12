@@ -10,8 +10,8 @@ class Usernamegen
     new(opts).one(&block)
   end
 
-  def self.all opts = {}
-    new(opts).all
+  def self.all(opts = {}, &block)
+    new(opts).all(&block)
   end
 
   def self.all_for_thing thing, opts = {}
@@ -48,8 +48,14 @@ class Usernamegen
     formatted
   end
 
-  def all
-    @descriptions.product(@things).map{|combination| combination.join(" ").titleize }
+  def all(&block)
+    all_usernames = if block_given?
+      @descriptions.product(@things).map{|combination| yield combination }
+    else
+      @descriptions.product(@things).map{|combination| combination.join(" ").titleize }
+    end
+
+    all_usernames
   end
 
   def all_for_thing thing
