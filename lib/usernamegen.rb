@@ -27,7 +27,7 @@ class Usernamegen
       descriptions: "#{ROOT}/lib/usernamegen/descriptions.txt",
       things: "#{ROOT}/lib/usernamegen/things.txt",
       rng: ::SecureRandom.urlsafe_base64(128),
-      format: block || ->(d){ d.join(" ").titleize },
+      format: block || ->(combination){ combination.join(" ").titleize },
     })
     @descriptions = load_file @opts[:descriptions]
     @things = load_file @opts[:things]
