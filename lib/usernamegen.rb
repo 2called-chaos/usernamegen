@@ -37,12 +37,12 @@ class Usernamegen
   end
 
   def one
-    username_arr = [@descriptions.sample(1, random: @opts[:rng]), @things.sample(1, random: @opts[:rng])]
+    combination = [@descriptions.sample(1, random: @opts[:rng]), @things.sample(1, random: @opts[:rng])]
 
     if block_given?
-      yield username_arr
+      yield combination
     else
-      username_arr.join(" ").titleize
+      combination.join(" ").titleize
     end
   end
 
