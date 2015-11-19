@@ -7,6 +7,21 @@ end
 
 task :default => [:test]
 
+desc "Gives you 10 random names (5 with default/5 with custom format)"
+task :example do
+  require 'usernamegen'
+  instance = Usernamegen.new
+  5.times { puts instance.one }
+  instance = Usernamegen.new {|a| a.join("-").downcase }
+  5.times { puts instance.one }
+end
+
+desc "Gives you ALL names"
+task :all_names do
+  require 'usernamegen'
+  Usernamegen.new.all.each{|n| puts n }
+end
+
 desc "Run performance benchmarks with benchmark-ips tests"
 task :benchmark do
   require 'usernamegen'
