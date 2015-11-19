@@ -18,4 +18,9 @@ class TestUsernamegen < Minitest::Test
     username = Usernamegen.one { |username| username.join("-").downcase }
     assert_match /^([a-z]*((-)))+[a-z]*$/, username
   end
+
+  def test_amount_of_names
+    # don't forget to update README as well!
+    assert_equal Usernamegen.all.count, 1_367_631
+  end
 end
