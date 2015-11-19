@@ -40,6 +40,11 @@ You can use the generator class like so:
     # same as #all but returns random entry
     Usernamegen.one
 
+You can return usernames in your custom format at all methods. Just pass a block, e.g.:
+
+    Usernamegen.one { |username| username.join("-").downcase }
+    => "able-action"
+
 
 You can find an example ActiveRecord model + rake import tasks in the following gist.
 

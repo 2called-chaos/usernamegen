@@ -6,20 +6,20 @@ require "active_support/core_ext"
 class Usernamegen
   ROOT = File.expand_path("../..", __FILE__)
 
-  def self.one opts = {}
-    new(opts).one
+  def self.one(opts = {}, &block)
+    new(opts).one(&block)
   end
 
-  def self.all opts = {}
-    new(opts).all
+  def self.all(opts = {}, &block)
+    new(opts).all(&block)
   end
 
-  def self.all_for_thing thing, opts = {}
-    new(opts).all_for_thing(thing)
+  def self.all_for_thing(thing, opts = {}, &block)
+    new(opts).all_for_thing(thing, &block)
   end
 
-  def self.all_for_desc desc, opts = {}
-    new(opts).all_for_desc(desc)
+  def self.all_for_desc(desc, opts = {}, &block)
+    new(opts).all_for_desc(desc, &block)
   end
 
   def initialize opts = {}
@@ -37,18 +37,36 @@ class Usernamegen
   end
 
   def one
-    [@descriptions.sample(1, random: @opts[:rng]), @things.sample(1, random: @opts[:rng])].join(" ").titleize
+    username_arr = [@descriptions.sample(1, random: @opts[:rng]), @things.sample(1, random: @opts[:rng])]
+
+    if block_given?
+      yield username_arr
+    else
+      username_arr.join(" ").titleize
+    end
   end
 
   def all
-    @descriptions.product(@things).map{|combination| combination.join(" ").titleize }
+    if block_given?
+      @descriptions.product(@things).map{|combination| yield combination }
+    else
+      @descriptions.product(@things).map{|combination| combination.join(" ").titleize }
+    end
   end
 
   def all_for_thing thing
-    @descriptions.product([thing]).map{|combination| combination.join(" ").titleize }
+    if block_given?
+      @descriptions.product([thing]).map{|combination| yield combination }
+    else
+      @descriptions.product([thing]).map{|combination| combination.join(" ").titleize }
+    end
   end
 
   def all_for_desc desc
-    [desc].product(@things).map{|combination| combination.join(" ").titleize }
+    if block_given?
+      [desc].product(@things).map{|combination| yield combination }
+    else
+      [desc].product(@things).map{|combination| combination.join(" ").titleize }
+    end
   end
 end
