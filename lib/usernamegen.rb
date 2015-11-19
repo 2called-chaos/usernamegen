@@ -36,45 +36,37 @@ class Usernamegen
     File.read(file).split("\n").map(&:strip).reject(&:blank?)
   end
 
-  def one(&block)
+  def one
     username_arr = [@descriptions.sample(1, random: @opts[:rng]), @things.sample(1, random: @opts[:rng])]
 
-    formatted = if block_given?
+    if block_given?
       yield username_arr
     else
       username_arr.join(" ").titleize
     end
-
-    formatted
   end
 
-  def all(&block)
-    all_usernames = if block_given?
+  def all
+    if block_given?
       @descriptions.product(@things).map{|combination| yield combination }
     else
       @descriptions.product(@things).map{|combination| combination.join(" ").titleize }
     end
-
-    all_usernames
   end
 
-  def all_for_thing(thing, &block)
-    all_usernames = if block_given?
+  def all_for_thing thing
+    if block_given?
       @descriptions.product([thing]).map{|combination| yield combination }
     else
       @descriptions.product([thing]).map{|combination| combination.join(" ").titleize }
     end
-
-    all_usernames
   end
 
-  def all_for_desc(desc, &block)
-    all_usernames = if block_given?
+  def all_for_desc desc
+    if block_given?
       [desc].product(@things).map{|combination| yield combination }
     else
       [desc].product(@things).map{|combination| combination.join(" ").titleize }
     end
-
-    all_usernames
   end
 end
