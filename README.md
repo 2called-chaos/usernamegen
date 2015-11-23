@@ -18,6 +18,7 @@ This gem uses two lists (descriptive words and nouns) and multiplies them with e
   * Chemical Rabbit
   * [surprise me](https://de.gamesplanet.com/namegen)
 
+
 ## Installation
 
 Requires Ruby >= 1.9.3
@@ -30,25 +31,83 @@ Or list in your Gemfile
 
     gem 'usernamegen'
 
+
 ## Usage
 
-You can use the generator class like so:
+You can use the generator class like so (also see Caching/Benchmark):
 
-    # load files and assembles list each time (yielding more than 1 million strings, cache them!)
-    Usernamegen.all
+```ruby
+# Assembles whole list each time (yielding more than 1 million strings, cache them!)
+Usernamegen.all
 
-    # same as #all but returns random entry
-    Usernamegen.one
+# Samples one item from both lists and assembles them (fast)
+Usernamegen.one
+
+# Assembles a list for a given thing (huge result set)
+Usernamegen.all_for_thing("thing")
+
+# Assembles a list for a given description (huge result set)
+Usernamegen.all_for_desc("description")
+```
+
+Initiating the class will instantly load the two text files into memory (as array). You can also use the instance approach if you have multiple calls to the generator.
+
+```ruby
+generator = Usernamegen.new(opts = {}, &formatter)
+generator.one
+generator.all_for_thing
+```
+
+## Custom format
 
 You can return usernames in your custom format at all methods. Just pass a block, e.g.:
 
-    Usernamegen.one { |username| username.join("-").downcase }
-    => "able-action"
+```ruby
+Usernamegen.one { |combination| combination.join("-").downcase }
+=> "able-action"
+```
+
+If you use the instance approach you may also want to redefine the default format.
+
+```ruby
+generator = Usernamegen.new format: ->(combination){ combination.join("-").downcase }
+
+# or sugar version
+generator = Usernamegen.new { |combination| combination.join("-").downcase }
+
+generator.one
+=> "malicious-expert"
+```
 
 
-You can find an example ActiveRecord model + rake import tasks in the following gist.
+## Options
 
+The generator class has a few options but except for the format option there is little reason for you to change them.
+
+```ruby
+Usernamegen.new({
+  # The default format (note that passing a block to #new will overwrite the hash option)
+  format: ->(combination){ combination.join(" ").titleize },
+
+  # This option only exists for testing
+  rng: ::SecureRandom.urlsafe_base64(128),
+
+  # You could point to different word lists here
+  descriptions: "#{ROOT}/lib/usernamegen/descriptions.txt",
+  things: "#{ROOT}/lib/usernamegen/things.txt",
+})
+```
+
+
+## Caching / Benchmark
+
+While the `#one` method is quite fast it's still advised to import the combinations to your database in a batch fashion opposed to generate single names on the fly.
+
+We suggest a separate _Codename_ model and assign a free name to a user when he needs one (usually upon registration or first post). You can find an example ActiveRecord model + rake import tasks in the following gist.
+
+  * [» Benchmarks](https://gist.github.com/2called-chaos/a0ea619fdc7ef245719d)
   * [» ActiveRecord model example and rake import task](https://gist.github.com/2called-chaos/46705324d913e4f9cc6b)
+
 
 ## Testing
 
