@@ -13,7 +13,7 @@ task :example do
   instance = Usernamegen.new
   5.times { puts instance.one }
   instance = Usernamegen.new {|a| a.join("-").downcase }
-  5.times { puts instance.one }
+  puts instance.some(5)
 end
 
 desc "Gives you ALL names"
@@ -73,78 +73,6 @@ task :benchmark do
     x.compare!
   end ; puts
 
-  # all
-  Benchmark.ips do |x|
-    x.time = 5
-    x.warmup = 2
-
-    x.report("::all") do |times|
-      i = 0
-      while i < times
-        Usernamegen.all
-        i += 1
-      end
-    end
-
-    x.report("#all") do |times|
-      i = 0
-      while i < times
-        instance.all
-        i += 1
-      end
-    end
-
-    x.compare!
-  end ; puts
-
-  # all_for_thing
-  Benchmark.ips do |x|
-    x.time = 5
-    x.warmup = 2
-
-    x.report("::all_for_thing") do |times|
-      i = 0
-      while i < times
-        Usernamegen.all_for_thing("foo")
-        i += 1
-      end
-    end
-
-    x.report("#all_for_thing") do |times|
-      i = 0
-      while i < times
-        instance.all_for_thing("foo")
-        i += 1
-      end
-    end
-
-    x.compare!
-  end ; puts
-
-  # all_for_desc
-  Benchmark.ips do |x|
-    x.time = 5
-    x.warmup = 2
-
-    x.report("::all_for_desc") do |times|
-      i = 0
-      while i < times
-        Usernamegen.all_for_desc("bar")
-        i += 1
-      end
-    end
-
-    x.report("#all_for_desc") do |times|
-      i = 0
-      while i < times
-        instance.all_for_desc("bar")
-        i += 1
-      end
-    end
-
-    x.compare!
-  end ; puts
-
   # instance compare
   Benchmark.ips do |x|
     x.time = 5
@@ -158,6 +86,22 @@ task :benchmark do
       end
     end
 
+    x.report("#some(1)") do |times|
+      i = 0
+      while i < times
+        instance.some(1)
+        i += 1
+      end
+    end
+
+    x.report("#some(10)") do |times|
+      i = 0
+      while i < times
+        instance.some(10)
+        i += 1
+      end
+    end
+
     x.report("#all") do |times|
       i = 0
       while i < times
@@ -178,6 +122,47 @@ task :benchmark do
       i = 0
       while i < times
         instance.all_for_desc("bar")
+        i += 1
+      end
+    end
+
+    x.compare!
+  end ; puts
+end
+
+
+desc "test benchmark (for while developing)"
+task :testbench do
+  require 'usernamegen'
+  require 'benchmark'
+  require 'benchmark/ips'
+
+  # initial load
+  Benchmark.ips do |x|
+    x.time = 5
+    x.warmup = 2
+    instance = Usernamegen.new
+
+    x.report("#one") do |times|
+      i = 0
+      while i < times
+        instance.one
+        i += 1
+      end
+    end
+
+    x.report("#some(1)") do |times|
+      i = 0
+      while i < times
+        instance.some(1)
+        i += 1
+      end
+    end
+
+    x.report("#some(10)") do |times|
+      i = 0
+      while i < times
+        instance.some(10)
         i += 1
       end
     end

@@ -43,6 +43,10 @@ Usernamegen.all
 # Samples one item from both lists and assembles them (fast)
 Usernamegen.one
 
+# Uses multiple `#one` calls to give you an array of names without having to take a subset of `#all`.
+# You may get duplicate names! This is just a shorthand as simple as `AMOUNT.times.map{ one }`.
+Usernamegen.some(10)
+
 # Assembles a list for a given thing (huge result set)
 Usernamegen.all_for_thing("thing")
 
@@ -101,7 +105,7 @@ Usernamegen.new({
 
 ## Caching / Benchmark
 
-While the `#one` method is quite fast it's still advised to import the combinations to your database in a batch fashion opposed to generate single names on the fly.
+While the `#one` and `#some` methods are quite fast it's still advised to import the combinations to your database in a batch fashion opposed to generate single names on the fly.
 
 We suggest a separate _Codename_ model and assign a free name to a user when he needs one (usually upon registration or first post). You can find an example ActiveRecord model + rake import tasks in the following gist.
 

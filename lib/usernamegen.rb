@@ -10,6 +10,10 @@ class Usernamegen
     new(opts).one(&block)
   end
 
+  def self.some(amount, opts = {}, &block)
+    new(opts).some(amount, &block)
+  end
+
   def self.all(opts = {}, &block)
     new(opts).all(&block)
   end
@@ -40,6 +44,10 @@ class Usernamegen
   def one &block
     combination = [@descriptions.sample(1, random: @opts[:rng]), @things.sample(1, random: @opts[:rng])]
     (block || @opts[:format]).call(combination)
+  end
+
+  def some amount, &block
+    amount.times.map{ one(&block) }
   end
 
   def all &block
