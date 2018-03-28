@@ -30,7 +30,7 @@ class Usernamegen
     @opts = opts.reverse_merge({
       descriptions: "#{ROOT}/lib/usernamegen/descriptions.txt",
       things: "#{ROOT}/lib/usernamegen/things.txt",
-      rng: ::SecureRandom.urlsafe_base64(128),
+      rng: Random.new,
       format: block || ->(combination){ combination.join(" ").titleize },
     })
     @descriptions = load_file @opts[:descriptions]
