@@ -1,7 +1,7 @@
 # Usernamegen - a not so serious name generator
 
 [![Gem Version](https://badge.fury.io/rb/usernamegen.svg)](http://badge.fury.io/rb/usernamegen)
-[![Build Status](https://travis-ci.org/2called-chaos/usernamegen.svg?branch=master)](https://travis-ci.org/2called-chaos/usernamegen)
+[![Build Status](https://github.com/2called-chaos/usernamegen/actions/workflows/spec.yml/badge.svg)](https://github.com/2called-chaos/usernamegen/actions/workflows/spec.yml)
 
 We thought our users should be able to comment even when they haven't choose a username yet.
 To make it easier to follow conversations we didn't want to show "anonymous" or some boring incrementing name á la "guest 1234".
